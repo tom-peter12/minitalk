@@ -17,7 +17,9 @@ char	*assembler;
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static int i;
-
+	(void)info;
+	(void)context;
+	
 	if (!assembler)
 		assembler = ft_strdup("");
 	if (signo == SIGUSR1)

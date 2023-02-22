@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 20:02:03 by tpetros           #+#    #+#             */
-/*   Updated: 2023/01/10 20:02:05 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/15 20:34:27 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/15 20:34:29 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef CLIENT_H
+# define CLIENT_H
+# include "../libft/libft.h"
+# include <signal.h>
 
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
+char	*to_binary(unsigned int c);
+char	*ft_strrev(char *str);
+void	send_the_string(pid_t proc_id, char *str);
+#endif

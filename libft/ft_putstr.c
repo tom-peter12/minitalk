@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:34:27 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/15 20:34:29 by tpetros          ###   ########.fr       */
+/*   Created: 2023/01/10 20:05:16 by tpetros           #+#    #+#             */
+/*   Updated: 2023/01/10 20:05:17 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
-# include "../helpers/libft/libft.h"
-# include "../helpers/ft_printf/ft_printf.h"
-# include <signal.h>
+#include "libft.h"
 
-char	*to_binary(int c);
-char	*ft_strrev(char *str);
-void	send_the_string(pid_t proc_id, char *str);
-#endif
+int	ft_putstr(char *str)
+{
+	int	count;
+
+	count = 0;
+	if (str == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (*str != '\0')
+	{
+		count += ft_putchar(*str);
+		str++;
+	}
+	return (count);
+}

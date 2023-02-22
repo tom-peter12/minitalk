@@ -12,10 +12,10 @@
 
 #include "client.h"
 
-char	*to_binary(int c)
+char	*to_binary(unsigned int c)
 {
-	char	*bin_holder;
-	int		h;
+	char			*bin_holder;
+	unsigned int	h;
 
 	bin_holder = (char *)ft_calloc(9, 1);
 	h = 0;
