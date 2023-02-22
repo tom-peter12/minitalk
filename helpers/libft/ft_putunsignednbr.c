@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putpointer.c                                    :+:      :+:    :+:   */
+/*   ft_putunsignednbr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 18:22:03 by tpetros           #+#    #+#             */
-/*   Updated: 2023/01/10 18:22:05 by tpetros          ###   ########.fr       */
+/*   Created: 2023/01/10 20:14:00 by tpetros           #+#    #+#             */
+/*   Updated: 2023/01/10 20:14:02 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static int	ft_writehex(unsigned long long ptr)
+static int	ft_lennbr(unsigned int nb)
 {
 	int	count;
 
 	count = 0;
-	if (ptr >= 16)
+	if (nb <= 0)
 	{
-		count += ft_writehex(ptr / 16);
-		count += ft_writehex(ptr % 16);
+		nb = nb * -1;
+		count++;
 	}
-	else if (ptr > 9)
-		count += ft_putchar(ptr - 10 + 'a');
-	else
-		count += ft_putchar(ptr + '0');
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		count++;
+	}
 	return (count);
 }
 
-int	ft_putpointer(unsigned long long ptr)
+int	ft_putunsignednbr(unsigned int unb)
 {
-	int	count;
-
-	count = 0;
-	count += ft_putstr("0x");
-	if (ptr == 0)
-		count += ft_putchar('0');
-	else
+	if (unb < 0)
 	{
-		count += ft_writehex(ptr);
+		unb = UINT_MAX - unb;
 	}
-	return (count);
+	if (unb > 9)
+	{
+		ft_putunsignednbr(unb / 10);
+		ft_putunsignednbr(unb % 10);
+	}
+	else
+		ft_putchar(unb + '0');
+	return (ft_lennbr(unb));
 }

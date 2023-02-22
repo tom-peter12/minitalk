@@ -13,10 +13,9 @@
 #ifndef CLIENT_H
 # define CLIENT_H
 # include "../helpers/libft/libft.h"
-# include "../helpers/ft_printf/ft_printf.h"
 # include <signal.h>
 
-char	*to_binary(int c);
+char	*to_binary(unsigned int c);
 char	*ft_strrev(char *str);
 void	send_the_string(pid_t proc_id, char *str);
 #endif

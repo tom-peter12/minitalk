@@ -5,36 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/10 20:52:50 by tpetros           #+#    #+#              #
-#    Updated: 2023/01/10 20:52:52 by tpetros          ###   ########.fr        #
+#    Created: 2023/02/22 21:07:31 by tpetros           #+#    #+#              #
+#    Updated: 2023/02/22 21:07:33 by tpetros          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+SERVER_NAME = server
+CLIENT_NAME = client
 
-SRC_FILES = ft_puthex.c ft_printf.c ft_putpointer.c ft_putunsignednbr.c \
-			ft_writer.c ft_putchar.c ft_putnbr.c ft_putstr.c \
-			ft_strlen.c
+SERVER_SRC_FILES = server/server_utils.c server/server.c
+CLIENT_SRC_FILES = client/client.c client/client_utils.c
 
-CC = gcc
+CC = cc
 RM = rm -rf
 
 CFLAGS = -Wall -Werror -Wextra
 
-OBJS = ${SRC_FILES:.c=.o}
+SERVER_OBJS = ${SERVER_SRC_FILES:.c=.o}
+CLIENT_OBJS = ${CLIENT_SRC_FILES:.c=.o}
 
-.c.o:
-	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
-
-$(NAME): ${OBJS}
-	ar rcs ${NAME} ${OBJS}
-
-all: ${NAME}
-
+all: ${SERVER_NAME}
+	cd ./helpers/libft/ && make
+	${CC} ${CFLAGS} ${SERVER_OBJS} ./helpers/libft/libft.a -o ${SERVER_NAME} 
+# ${CC} ${CFLAGS} -g $< -o ${<:.c=.o}
 clean:
-	${RM} ${OBJS} 
+	cd ./helpers/libft/ && make clean
+	${RM} ${SERVER_OBJS} 
 
 fclean: clean
-	${RM} ${NAME}
+	cd ./helpers/libft/ && make fclean
+	${RM} ${SERVER_NAME}
 
 re:	fclean all
