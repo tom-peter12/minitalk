@@ -1,47 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunsignednbr.c                                :+:      :+:    :+:   */
+/*   ft_putpointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 20:14:00 by tpetros           #+#    #+#             */
-/*   Updated: 2023/01/10 20:14:02 by tpetros          ###   ########.fr       */
+/*   Created: 2023/01/10 18:22:03 by tpetros           #+#    #+#             */
+/*   Updated: 2023/01/10 18:22:05 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	ft_lennbr(unsigned int nb)
+static int	ft_writehex(unsigned long long ptr)
 {
 	int	count;
 
 	count = 0;
-	if (nb <= 0)
+	if (ptr >= 16)
 	{
-		nb = nb * -1;
-		count++;
+		count += ft_writehex(ptr / 16);
+		count += ft_writehex(ptr % 16);
 	}
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		count++;
-	}
+	else if (ptr > 9)
+		count += ft_putchar(ptr - 10 + 'a');
+	else
+		count += ft_putchar(ptr + '0');
 	return (count);
 }
 
-int	ft_putunsignednbr(unsigned int unb)
+int	ft_putpointer(unsigned long long ptr)
 {
-	if (unb < 0)
-	{
-		unb = UINT_MAX - unb;
-	}
-	if (unb > 9)
-	{
-		ft_putunsignednbr(unb / 10);
-		ft_putunsignednbr(unb % 10);
-	}
+	int	count;
+
+	count = 0;
+	count += ft_putstr("0x");
+	if (ptr == 0)
+		count += ft_putchar('0');
 	else
-		ft_putchar(unb + '0');
-	return (ft_lennbr(unb));
+	{
+		count += ft_writehex(ptr);
+	}
+	return (count);
 }

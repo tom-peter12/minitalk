@@ -1,45 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putpointer.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 18:22:03 by tpetros           #+#    #+#             */
-/*   Updated: 2023/01/10 18:22:05 by tpetros          ###   ########.fr       */
+/*   Created: 2023/01/10 20:06:27 by tpetros           #+#    #+#             */
+/*   Updated: 2023/01/10 20:06:29 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	ft_writehex(unsigned long long ptr)
+static int	ft_lennbr(long nb)
 {
 	int	count;
 
 	count = 0;
-	if (ptr >= 16)
+	if (nb <= 0)
 	{
-		count += ft_writehex(ptr / 16);
-		count += ft_writehex(ptr % 16);
+		nb = nb * -1;
+		count++;
 	}
-	else if (ptr > 9)
-		count += ft_putchar(ptr - 10 + 'a');
-	else
-		count += ft_putchar(ptr + '0');
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		count++;
+	}
 	return (count);
 }
 
-int	ft_putpointer(unsigned long long ptr)
+int	ft_putnbr(int n)
 {
-	int	count;
+	int	i;
+	int	nb;
 
-	count = 0;
-	count += ft_putstr("0x");
-	if (ptr == 0)
-		count += ft_putchar('0');
+	nb = n;
+	if (nb == INT_MIN)
+	{
+		ft_putstr("-2");
+		nb = 147483648;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		ft_putnbr(nb * -1);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
 	else
 	{
-		count += ft_writehex(ptr);
+		i = nb + 48;
+		ft_putchar(i);
 	}
-	return (count);
+	return (ft_lennbr(n));
 }

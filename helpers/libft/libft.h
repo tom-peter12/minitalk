@@ -15,7 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -47,7 +46,7 @@ int			ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *src);
 char		*ft_substr(char const *src, unsigned int start, size_t len);
-char		*ft_strjoin(char *s1, char *s2);
+char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 char		*ft_itoa(int n);
@@ -66,13 +65,5 @@ void		ft_lstdelone(t_list *lst, void (*del) (void *));
 void		ft_lstclear(t_list **lst, void (*del) (void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int			ft_printf(const char *str, ...);
-int			ft_putchar(char c);
-int			ft_puthex(unsigned int num, const char format);
-int			ft_putnbr(int n);
-int			ft_putpointer(unsigned long long ptr);
-int			ft_putstr(char *str);
-int			ft_putunsignednbr(unsigned int unb);
-int			ft_writer(va_list ap, char c);
 
 #endif

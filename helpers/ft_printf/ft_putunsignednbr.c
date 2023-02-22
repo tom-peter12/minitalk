@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putunsignednbr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 20:06:27 by tpetros           #+#    #+#             */
-/*   Updated: 2023/01/10 20:06:29 by tpetros          ###   ########.fr       */
+/*   Created: 2023/01/10 20:14:00 by tpetros           #+#    #+#             */
+/*   Updated: 2023/01/10 20:14:02 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	ft_lennbr(long nb)
+static int	ft_lennbr(unsigned int nb)
 {
 	int	count;
 
@@ -30,31 +30,18 @@ static int	ft_lennbr(long nb)
 	return (count);
 }
 
-int	ft_putnbr(int n)
+int	ft_putunsignednbr(unsigned int unb)
 {
-	int	i;
-	int	nb;
-
-	nb = n;
-	if (nb == INT_MIN)
+	if (unb < 0)
 	{
-		ft_putstr("-2");
-		nb = 147483648;
+		unb = UINT_MAX - unb;
 	}
-	if (nb < 0)
+	if (unb > 9)
 	{
-		ft_putchar('-');
-		ft_putnbr(nb * -1);
-	}
-	else if (nb > 9)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putunsignednbr(unb / 10);
+		ft_putunsignednbr(unb % 10);
 	}
 	else
-	{
-		i = nb + 48;
-		ft_putchar(i);
-	}
-	return (ft_lennbr(n));
+		ft_putchar(unb + '0');
+	return (ft_lennbr(unb));
 }

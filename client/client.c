@@ -15,34 +15,31 @@
 void	send_the_string(pid_t proc_id, char *str)
 {
 	int		i;
-	int		c;
 	char	*value;
 
 	i = 0;
-	value = (char *) ft_calloc(9, 1);
+	value = (char *) ft_calloc((8 + 1), 1);
 	while (str[i])
 	{
-		c = 0;
 		value = to_binary(str[i]);
-		while (value[c])
+		ft_printf("%s||\n", value);
+		while (*value)
 		{
-			if (value[c] == '0')
+			if (*value == '0')
 				kill(proc_id, SIGUSR1);
-			if (value[c] == '1')
+			else if (*value == '1')
 				kill(proc_id, SIGUSR2);
-			c++;
-			usleep(50);
+			value++;
+			usleep(10);
 		}
 		i++;
 	}
-	ft_printf("Sent bytes {%d} : Equivalent to {%d} bits\n", i, c * i);
-	free(value);
 }
 
 int	main(int argc, char *argv[])
 {
-	pid_t	the_process_id;
-	char	*the_string;
+	pid_t				the_process_id;
+	char				*the_string;
 
 	if (argc != 3)
 	{
@@ -51,7 +48,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 	{
-		the_string = (char *) ft_calloc((ft_strlen(argv[2]) + 1), sizeof(char));
+		the_string = (char *) malloc(sizeof(char) * (ft_strlen(argv[2]) + 1));
 		ft_strlcpy(the_string, argv[2], ft_strlen(argv[2]) + 1);
 		the_process_id = ft_atoi(argv[1]);
 		send_the_string(the_process_id, the_string);
