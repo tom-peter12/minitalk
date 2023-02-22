@@ -23,10 +23,8 @@ char	to_char(char *str)
 	len = ft_strlen(str);
 	while (str[i])
 	{
-		// ft_printf("%c||\n", str[i]);
 		c = c + (ft_iterative_power(2, len - i - 1) * (str[i] - '0'));
 		i++;
-		// ft_printf("##%d||\n", c);
 	}
 	return (c);
 }
