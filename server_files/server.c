@@ -15,9 +15,9 @@
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static char	*assembler;
+
 	(void)info;
 	(void)context;
-	
 	if (!assembler)
 		assembler = ft_strdup("");
 	if (signo == SIGUSR1)
@@ -31,14 +31,14 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 		assembler = NULL;
 	}
 	else
-		;
+		return ;
 }
 
 int	main(void)
 {
 	struct sigaction	act;
-	ft_memset(&act, 0, sizeof(act));
 
+	ft_memset(&act, 0, sizeof(act));
 	ft_printf("|| %d ||\n", getpid());
 	act.sa_sigaction = signal_handler;
 	sigaction(SIGUSR1, &act, NULL);

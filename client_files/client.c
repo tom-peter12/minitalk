@@ -19,7 +19,6 @@ void	send_the_string(pid_t proc_id, char *str)
 	char	*value;
 
 	i = 0;
-	value = (char *) ft_calloc(9, 1);
 	while (str[i])
 	{
 		c = 0;
@@ -34,9 +33,9 @@ void	send_the_string(pid_t proc_id, char *str)
 			usleep(50);
 		}
 		i++;
+		free(value);
 	}
 	ft_printf("Sent bytes {%d} : Equivalent to {%d} bits\n", i, c * i);
-	free(value);
 }
 
 int	main(int argc, char *argv[])

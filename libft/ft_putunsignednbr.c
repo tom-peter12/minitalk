@@ -32,10 +32,6 @@ static int	ft_lennbr(unsigned int nb)
 
 int	ft_putunsignednbr(unsigned int unb)
 {
-	if (unb < 0)
-	{
-		unb = UINT_MAX - unb;
-	}
 	if (unb > 9)
 	{
 		ft_putunsignednbr(unb / 10);
