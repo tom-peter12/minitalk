@@ -12,11 +12,9 @@
 
 #include "server.h"
 
-char	*assembler;
-
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
-	static int i;
+	static char	*assembler;
 	(void)info;
 	(void)context;
 	
@@ -26,16 +24,14 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 		assembler = ft_strjoin(assembler, "0");
 	else if (signo == SIGUSR2)
 		assembler = ft_strjoin(assembler, "1");
-	if (ft_strlen(assembler) % 8 != 0)
-		;
-	else
+	if (ft_strlen(assembler) == 8)
 	{
-		while (assembler[i] != '\0')
-		{
-			ft_printf("%c", to_char(ft_substr(assembler, i, 8)));
-			i = i + 8;
-		}
+		ft_printf("%c", to_char(assembler));
+		free(assembler);
+		assembler = NULL;
 	}
+	else
+		;
 }
 
 int	main(void)

@@ -14,9 +14,9 @@
 # define SERVER_H
 # include <signal.h>
  #include <unistd.h>
-# include "../client/client.h"
+# include "../libft/libft.h"
 
-int	ft_iterative_power(int nb, int power);
+int		ft_iterative_power(int nb, int power);
 char	to_char(char *str);
 
 #endif
