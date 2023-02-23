@@ -13,10 +13,10 @@
 #ifndef SERVER_H
 # define SERVER_H
 # include <signal.h>
- #include <unistd.h>
+# include <unistd.h>
 # include "../libft/libft.h"
 
-int		ft_iterative_power(int nb, int power);
 char	to_char(char *str);
+int		ft_iterative_power(int nb, int power);
 
 #endif

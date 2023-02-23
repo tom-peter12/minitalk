@@ -16,7 +16,7 @@ char	to_char(char *str)
 {
 	int	i;
 	int	c;
-	int len;
+	int	len;
 
 	i = 0;
 	c = 0;
