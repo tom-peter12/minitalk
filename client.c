@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft/libft.h"
 
 void	send_the_string(pid_t proc_id, char *str)
 {

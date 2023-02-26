@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:33:20 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/15 20:33:22 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/23 21:25:31 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/23 21:25:32 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "libft/libft.h"
 
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static char	*assembler;
 
-	(void)info;
 	(void)context;
 	if (!assembler)
 		assembler = ft_strdup("");
@@ -27,6 +26,7 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 	if (ft_strlen(assembler) == 8)
 	{
 		ft_printf("%c", to_char(assembler));
+		kill(info->si_pid, SIGUSR1);
 		free(assembler);
 		assembler = NULL;
 	}

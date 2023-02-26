@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_iterative_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:34:40 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/15 20:34:41 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/23 21:12:43 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/23 21:12:45 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_H
-# define SERVER_H
-# include <signal.h>
-# include <unistd.h>
-# include "../libft/libft.h"
+#include "libft.h"
 
-char	to_char(char *str);
-int		ft_iterative_power(int nb, int power);
+int	ft_iterative_power(int nb, int power)
+{
+	int	multiplier;
 
-#endif
+	if (power == 0)
+		return (1);
+	else if (power < 0)
+		return (0);
+	else if (power == 1)
+		return (nb);
+	multiplier = nb;
+	while (power > 1)
+	{
+		nb = multiplier * nb;
+		power--;
+	}
+	return (nb);
+}

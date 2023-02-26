@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_utils.c                                     :+:      :+:    :+:   */
+/*   to_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 18:28:35 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/20 18:28:36 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/23 21:13:44 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/23 21:13:49 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "libft.h"
 
 char	to_char(char *str)
 {
@@ -27,23 +27,4 @@ char	to_char(char *str)
 		i++;
 	}
 	return (c);
-}
-
-int	ft_iterative_power(int nb, int power)
-{
-	int	multiplier;
-
-	if (power == 0)
-		return (1);
-	else if (power < 0)
-		return (0);
-	else if (power == 1)
-		return (nb);
-	multiplier = nb;
-	while (power > 1)
-	{
-		nb = multiplier * nb;
-		power--;
-	}
-	return (nb);
 }

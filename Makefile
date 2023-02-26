@@ -13,8 +13,11 @@
 SERVER_NAME = server
 CLIENT_NAME = client
 
-SERVER_SRC_FILES = server_files/server_utils.c server_files/server.c
-CLIENT_SRC_FILES = client_files/client.c client_files/client_utils.c
+SERVER_SRC_FILES = server.c
+CLIENT_SRC_FILES = client.c
+
+BONUS_SERVER_SRC_FILES = server_bonus.c
+BONUS_CLIENT_SRC_FILES = client_bonus.c
 
 CC = cc
 RM = rm -rf
@@ -24,7 +27,12 @@ CFLAGS = -Wall -Werror -Wextra
 SERVER_OBJS = ${SERVER_SRC_FILES:.c=.o}
 CLIENT_OBJS = ${CLIENT_SRC_FILES:.c=.o}
 
+BONUS_SERVER_OBJS = ${BONUS_SERVER_SRC_FILES:.c=.o}
+BONUS_CLIENT_OBJS = ${BONUS_CLIENT_SRC_FILES:.c=.o}
+
 all: ${SERVER_NAME} ${CLIENT_NAME}
+
+bonus: ${SERVER_NAME} ${CLIENT_NAME}
 
 ${SERVER_NAME}: ${SERVER_OBJS}
 	cd ./libft/ && make
