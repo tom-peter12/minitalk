@@ -17,7 +17,6 @@
 # include <limits.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include <signal.h>
 
 typedef struct s_list
 {
@@ -77,8 +76,6 @@ int			ft_putstr(char *str);
 int			ft_putunsignednbr(unsigned int unb);
 int			ft_writer(va_list ap, char c);
 int			ft_iterative_power(int nb, int power);
-char		to_char(char *str);
 char		*ft_strrev(char *str);
-char		*to_binary(unsigned int c);
 
 #endif

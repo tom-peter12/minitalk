@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "minitalk.h"
 
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
@@ -39,13 +39,11 @@ int	main(void)
 	struct sigaction	act;
 
 	ft_memset(&act, 0, sizeof(act));
-	ft_printf("|| %d ||\n", getpid());
 	act.sa_sigaction = signal_handler;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
+	ft_printf("Server PID: || %d ||\n", getpid());
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }

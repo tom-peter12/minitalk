@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_binary.c                                        :+:      :+:    :+:   */
+/*   minitalk_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: tomas <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 21:18:05 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/23 21:18:07 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/27 17:34:11 by tomas             #+#    #+#             */
+/*   Updated: 2023/02/27 17:34:12 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minitalk.h"
+
+char	to_char(char *str)
+{
+	int	i;
+	int	c;
+	int	len;
+
+	i = 0;
+	c = 0;
+	len = ft_strlen(str);
+	while (str[i])
+	{
+		c = c + (ft_iterative_power(2, len - i - 1) * (str[i] - '0'));
+		i++;
+	}
+	return (c);
+}
 
 char	*to_binary(unsigned int c)
 {
