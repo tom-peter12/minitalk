@@ -16,8 +16,8 @@ CLIENT_NAME = client
 SERVER_SRC_FILES = server.c minitalk_utils.c
 CLIENT_SRC_FILES = client.c minitalk_utils.c
 
-BONUS_SERVER_SRC_FILES = server_bonus.c
-BONUS_CLIENT_SRC_FILES = client_bonus.c
+# BONUS_SERVER_SRC_FILES = server_bonus.c
+# BONUS_CLIENT_SRC_FILES = client_bonus.c
 
 CC = cc
 RM = rm -rf

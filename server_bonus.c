@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:33:20 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/15 20:33:22 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/28 18:16:14 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/28 18:16:16 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
-	static char	*assembler;
+	static char	c;
+	static int	i;
 
 	(void)info;
 	(void)context;
-	if (!assembler)
-		assembler = ft_strdup("");
-	if (signo == SIGUSR1)
-		assembler = ft_strjoin(assembler, "0");
-	else if (signo == SIGUSR2)
-		assembler = ft_strjoin(assembler, "1");
-	if (ft_strlen(assembler) == 8)
+	if (signo == SIGUSR2)
+		c |= (1);
+	i++;
+	if (i == 8)
 	{
-		ft_printf("%c", to_char(assembler));
-		free(assembler);
-		assembler = NULL;
+		write(1, &c, 1);
+		i = 0;
+		c = 0;
 	}
-	else
-		return ;
+	c = c << 1;
 }
 
 int	main(void)

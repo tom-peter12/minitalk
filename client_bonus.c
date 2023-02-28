@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpetros <tpetros@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:33:04 by tpetros           #+#    #+#             */
-/*   Updated: 2023/02/15 20:33:07 by tpetros          ###   ########.fr       */
+/*   Created: 2023/02/28 18:16:27 by tpetros           #+#    #+#             */
+/*   Updated: 2023/02/28 18:16:28 by tpetros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,31 @@
 
 void	send_the_string(pid_t proc_id, char *str)
 {
-	size_t	i;
-	size_t	c;
-	char	*value;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (str[i])
 	{
-		c = 0;
-		value = to_binary(str[i]);
-		while (value[c])
+		j = 7;
+		while (j >= 0)
 		{
-			if (value[c] == '0')
-				kill(proc_id, SIGUSR1);
-			if (value[c] == '1')
+			if (str[i] & (1 << j))
 				kill(proc_id, SIGUSR2);
-			c++;
+			else
+				kill(proc_id, SIGUSR1);
+			j--;
 			usleep(100);
 		}
 		i++;
-		free(value);
 	}
 	ft_printf("Sent bytes %s{ %d }%s : Equivalent to bits %s{ %d }%s\n", GREEN,
-		i, NORMAL, GREEN, c * i, NORMAL);
+		i, NORMAL, GREEN, 8 * i, NORMAL);
 }
 
 int	ft_validate_pid(char *proc_id)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (proc_id[i])
