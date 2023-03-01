@@ -12,7 +12,7 @@
 
 #ifndef MINITALK_H
 # define MINITALK_H
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <signal.h>
 
 # define RED "\x1b[31m"
@@ -25,7 +25,5 @@
 void	signal_handler(int signo, siginfo_t *info, void *context);
 void	send_the_string(pid_t proc_id, char *str);
 int		ft_validate_pid(char *proc_id);
-char	to_char(char *str);
-char	*to_binary(unsigned int c);
 
 #endif

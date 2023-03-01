@@ -12,6 +12,29 @@
 
 #include "minitalk.h"
 
+static char	*to_binary(unsigned int c)
+{
+	char	*bin_holder;
+	size_t	h;
+	char	*temp;
+
+	bin_holder = (char *)ft_calloc(9, 1);
+	h = 0;
+	while (c > 0)
+	{
+		h = c % 2;
+		temp = ft_itoa(h);
+		bin_holder = ft_strjoin(bin_holder, temp);
+		c = c / 2;
+		free(temp);
+	}
+	while (8 - ft_strlen(bin_holder))
+	{
+		bin_holder = ft_strjoin(bin_holder, "0");
+	}
+	return (ft_strrev(bin_holder));
+}
+
 void	send_the_string(pid_t proc_id, char *str)
 {
 	size_t	i;
@@ -30,7 +53,7 @@ void	send_the_string(pid_t proc_id, char *str)
 			if (value[c] == '1')
 				kill(proc_id, SIGUSR2);
 			c++;
-			usleep(100);
+			usleep(600);
 		}
 		i++;
 		free(value);

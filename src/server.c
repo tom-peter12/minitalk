@@ -12,6 +12,23 @@
 
 #include "minitalk.h"
 
+static char	to_char(char *str)
+{
+	int	i;
+	int	c;
+	int	len;
+
+	i = 0;
+	c = 0;
+	len = ft_strlen(str);
+	while (str[i])
+	{
+		c = c + (ft_iterative_power(2, len - i - 1) * (str[i] - '0'));
+		i++;
+	}
+	return (c);
+}
+
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static char	*assembler;

@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static char	c;
 	static int	i;
 
-	(void)info;
 	(void)context;
+	(void)info;
 	if (signo == SIGUSR2)
 		c |= (1);
 	i++;

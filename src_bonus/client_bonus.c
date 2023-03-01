@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	send_the_string(pid_t proc_id, char *str)
 {
@@ -34,6 +34,16 @@ void	send_the_string(pid_t proc_id, char *str)
 	}
 	ft_printf("Sent bytes %s{ %d }%s : Equivalent to bits %s{ %d }%s\n", GREEN,
 		i, NORMAL, GREEN, 8 * i, NORMAL);
+}
+
+void	signal_handle(int sig)
+{
+	size_t	i;
+
+	i = 0;
+	if (sig == SIGUSR1)
+		i++;
+	ft_printf("");
 }
 
 int	ft_validate_pid(char *proc_id)
@@ -67,6 +77,7 @@ int	main(int argc, char *argv[])
 			ft_printf("Sending %s{ %s }%s to process %s{ %s } %s\n\n", MAGENTA,
 				argv[2], NORMAL, YELLOW, argv[1], NORMAL);
 			send_the_string(ft_atoi(argv[1]), argv[2]);
+			signal(SIGUSR1, signal_handle);
 		}
 		else
 		{
