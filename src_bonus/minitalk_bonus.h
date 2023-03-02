@@ -20,6 +20,7 @@
 # define GREEN "\x1b[32m"
 # define YELLOW "\x1b[33m"
 # define MAGENTA "\x1b[35m"
+# define BLUE "\x1b[34m"
 # define ERROR 64
 
 void	signal_handler(int signo, siginfo_t *info, void *context);
@@ -27,4 +28,3 @@ void	send_the_string(pid_t proc_id, char *str);
 int		ft_validate_pid(char *proc_id);
 
 #endif
-

@@ -12,6 +12,8 @@
 
 #include "minitalk.h"
 
+size_t	g_strlen;
+
 static char	*to_binary(unsigned int c)
 {
 	char	*bin_holder;
@@ -27,6 +29,7 @@ static char	*to_binary(unsigned int c)
 		bin_holder = ft_strjoin(bin_holder, temp);
 		c = c / 2;
 		free(temp);
+		temp = NULL;
 	}
 	while (8 - ft_strlen(bin_holder))
 	{
@@ -53,13 +56,20 @@ void	send_the_string(pid_t proc_id, char *str)
 			if (value[c] == '1')
 				kill(proc_id, SIGUSR2);
 			c++;
-			usleep(600);
+			usleep(100);
 		}
 		i++;
 		free(value);
 	}
 	ft_printf("Sent bytes %s{ %d }%s : Equivalent to bits %s{ %d }%s\n", GREEN,
 		i, NORMAL, GREEN, c * i, NORMAL);
+}
+
+int	ft_proc_id_error(void)
+{
+	ft_printf("%sThe process ID range should be b/n {0 - 4194304}.\n%s",
+		RED, NORMAL);
+	return (ERROR);
 }
 
 int	ft_validate_pid(char *proc_id)
@@ -90,16 +100,14 @@ int	main(int argc, char *argv[])
 	{
 		if (ft_validate_pid(argv[1]))
 		{
-			ft_printf("Sending %s{ %s }%s to process %s{ %s } %s\n\n", MAGENTA,
-				argv[2], NORMAL, YELLOW, argv[1], NORMAL);
+			g_strlen = ft_strlen(argv[2]);
+			ft_printf("Sending %s{ %d }%s Equivalent to bits  %s{ %d }%s to"
+				" process %s{ %s } %s\n\n", MAGENTA, g_strlen, NORMAL, BLUE,
+				g_strlen * 8, NORMAL, YELLOW, argv[1], NORMAL);
 			send_the_string(ft_atoi(argv[1]), argv[2]);
 		}
 		else
-		{
-			ft_printf("%sThe process ID range should be b/n {0 - 4194304}.\n%s",
-				RED, NORMAL);
-			return (ERROR);
-		}
+			ft_proc_id_error();
 	}
 	return (0);
 }

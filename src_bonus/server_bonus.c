@@ -18,7 +18,6 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 	static int	i;
 
 	(void)context;
-	(void)info;
 	if (signo == SIGUSR2)
 		c |= (1);
 	i++;
@@ -27,6 +26,7 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 		write(1, &c, 1);
 		i = 0;
 		c = 0;
+		kill(info->si_pid, SIGUSR1);
 	}
 	c = c << 1;
 }

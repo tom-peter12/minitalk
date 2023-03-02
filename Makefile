@@ -46,8 +46,6 @@ clean:
 	${RM} ${SERVER_OBJS} ${CLIENT_OBJS}
 	${RM} ${SERVER_OBJS_BONUS} ${CLIENT_OBJS_BONUS}
 
-
-
 fclean: clean
 	cd ./libft/ && make fclean
 	${RM} ${SERVER_NAME} ${CLIENT_NAME}

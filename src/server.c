@@ -47,8 +47,6 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 		free(assembler);
 		assembler = NULL;
 	}
-	else
-		return ;
 }
 
 int	main(void)

@@ -12,6 +12,8 @@
 
 #include "minitalk_bonus.h"
 
+size_t	g_strlen;
+
 void	send_the_string(pid_t proc_id, char *str)
 {
 	int		i;
@@ -32,18 +34,6 @@ void	send_the_string(pid_t proc_id, char *str)
 		}
 		i++;
 	}
-	ft_printf("Sent bytes %s{ %d }%s : Equivalent to bits %s{ %d }%s\n", GREEN,
-		i, NORMAL, GREEN, 8 * i, NORMAL);
-}
-
-void	signal_handle(int sig)
-{
-	size_t	i;
-
-	i = 0;
-	if (sig == SIGUSR1)
-		i++;
-	ft_printf("");
 }
 
 int	ft_validate_pid(char *proc_id)
@@ -63,8 +53,31 @@ int	ft_validate_pid(char *proc_id)
 		return (0);
 }
 
+void	signal_handler(int signo, siginfo_t *info, void *context)
+{
+	static size_t	i;
+
+	(void)context;
+	(void)info;
+	if (signo == SIGUSR1)
+		i++;
+	if (g_strlen == i)
+		ft_printf("Recieved %s{ %d }%s Equivalent to bits %s{ %d }%s from"
+			" process %s{ %u } %s\n\n", MAGENTA, i, NORMAL, BLUE, i * 8, NORMAL,
+			YELLOW, info->si_pid, NORMAL);
+}
+
+int	ft_proc_id_error(void)
+{
+	ft_printf("%sThe process ID range should be b/n {0 - 4194304}.\n%s",
+		RED, NORMAL);
+	return (ERROR);
+}
+
 int	main(int argc, char *argv[])
 {
+	struct sigaction	act;
+
 	if (argc != 3)
 	{
 		ft_printf("%sUsage:\t./client [server id] [string]\n%s", RED, NORMAL);
@@ -72,19 +85,19 @@ int	main(int argc, char *argv[])
 	}
 	else
 	{
+		ft_memset(&act, 0, sizeof(act));
 		if (ft_validate_pid(argv[1]))
 		{
-			ft_printf("Sending %s{ %s }%s to process %s{ %s } %s\n\n", MAGENTA,
-				argv[2], NORMAL, YELLOW, argv[1], NORMAL);
+			act.sa_sigaction = signal_handler;
+			sigaction(SIGUSR1, &act, NULL);
+			g_strlen = ft_strlen(argv[2]);
+			ft_printf("Sending %s{ %d }%s Equivalent to bits  %s{ %d }%s to"
+				" process %s{ %s } %s\n\n", MAGENTA, g_strlen, NORMAL, BLUE,
+				g_strlen * 8, NORMAL, YELLOW, argv[1], NORMAL);
 			send_the_string(ft_atoi(argv[1]), argv[2]);
-			signal(SIGUSR1, signal_handle);
 		}
 		else
-		{
-			ft_printf("%sThe process ID range should be b/n {0 - 4194304}.\n%s",
-				RED, NORMAL);
-			return (ERROR);
-		}
+			ft_proc_id_error();
 	}
 	return (0);
 }
