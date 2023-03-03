@@ -32,6 +32,7 @@ static char	to_char(char *str)
 void	signal_handler(int signo, siginfo_t *info, void *context)
 {
 	static char	*assembler;
+	char		c;
 
 	(void)info;
 	(void)context;
@@ -43,7 +44,8 @@ void	signal_handler(int signo, siginfo_t *info, void *context)
 		assembler = ft_strjoin(assembler, "1");
 	if (ft_strlen(assembler) == 8)
 	{
-		ft_printf("%c", to_char(assembler));
+		c = to_char(assembler);
+		write(1, &c, 1);
 		free(assembler);
 		assembler = NULL;
 	}
