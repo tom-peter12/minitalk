@@ -30,7 +30,7 @@ void	send_the_string(pid_t proc_id, char *str)
 			else
 				kill(proc_id, SIGUSR1);
 			j--;
-			usleep(100);
+			usleep(200);
 		}
 		i++;
 	}

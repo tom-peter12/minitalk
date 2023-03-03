@@ -13,6 +13,9 @@
 SERVER_NAME = server
 CLIENT_NAME = client
 
+SERVER_NAME2 = server2
+CLIENT_NAME2 = client2
+
 SERVER_SRC = src/server.c 
 CLIENT_SRC = src/client.c 
 
@@ -35,11 +38,14 @@ ${SERVER_NAME} ${CLIENT_NAME}: ${SERVER_OBJS} ${CLIENT_OBJS}
 	${CC} ${CFLAGS} ${SERVER_OBJS} ./libft/libft.a -o ${SERVER_NAME}
 	${CC} ${CFLAGS} ${CLIENT_OBJS} ./libft/libft.a -o ${CLIENT_NAME}
 
+${SERVER_NAME2} ${CLIENT_NAME2}: ${SERVER_OBJS_BONUS} ${CLIENT_OBJS_BONUS}
+	cd ./libft/ && make
+	${CC} ${CFLAGS} ${SERVER_OBJS_BONUS} ./libft/libft.a -o ${SERVER_NAME2}
+	${CC} ${CFLAGS} ${CLIENT_OBJS_BONUS} ./libft/libft.a -o ${CLIENT_NAME2}
+
 all: ${SERVER_NAME} ${CLIENT_NAME}
 
-bonus: ${SERVER_NAME} ${CLIENT_NAME} ${SERVER_OBJS_BONUS} ${CLIENT_OBJS_BONUS}
-	${CC} ${CFLAGS} ${SERVER_OBJS_BONUS} ./libft/libft.a -o ${SERVER_NAME}
-	${CC} ${CFLAGS} ${CLIENT_OBJS_BONUS} ./libft/libft.a -o ${CLIENT_NAME}
+bonus: ${SERVER_NAME2} ${CLIENT_NAME2}
 
 clean:
 	cd ./libft/ && make clean
@@ -49,5 +55,6 @@ clean:
 fclean: clean
 	cd ./libft/ && make fclean
 	${RM} ${SERVER_NAME} ${CLIENT_NAME}
+	${RM} ${SERVER_NAME2} ${CLIENT_NAME2}
 
 re:	fclean all

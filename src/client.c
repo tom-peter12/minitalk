@@ -56,7 +56,7 @@ void	send_the_string(pid_t proc_id, char *str)
 			if (value[c] == '1')
 				kill(proc_id, SIGUSR2);
 			c++;
-			usleep(100);
+			usleep(250);
 		}
 		i++;
 		free(value);
